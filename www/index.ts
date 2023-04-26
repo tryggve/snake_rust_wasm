@@ -10,7 +10,6 @@ init().then((wasm) => {
     const snakeSpawnIdx = random(WORLD_WIDTH * WORLD_WIDTH)
 
     const world = World.new(WORLD_WIDTH, snakeSpawnIdx)
-    const worldWidth = world.width()
 
     const gameControlBtn = document.getElementById('game-control-btn')
     const gameStatusLabel = document.getElementById('game-status')
@@ -18,8 +17,8 @@ init().then((wasm) => {
     const canvas = <HTMLCanvasElement> document.getElementById('snake-canvas')
 
     const ctx = canvas.getContext('2d')
-    canvas.height = worldWidth * CELL_SIZE
-    canvas.width = worldWidth * CELL_SIZE
+    canvas.height = WORLD_WIDTH * CELL_SIZE
+    canvas.width = WORLD_WIDTH * CELL_SIZE
 
     gameControlBtn.addEventListener('click', event => {
         const status = world.game_status()
@@ -53,22 +52,22 @@ init().then((wasm) => {
     const drawWorld = () => {
         ctx.beginPath()
 
-        for (let x = 0; x < worldWidth + 1; x++) {
+        for (let x = 0; x < WORLD_WIDTH + 1; x++) {
             ctx.moveTo(CELL_SIZE * x , 0)
-            ctx.lineTo(CELL_SIZE * x, worldWidth * CELL_SIZE)
+            ctx.lineTo(CELL_SIZE * x, WORLD_WIDTH * CELL_SIZE)
         }
 
-        for (let y = 0; y < worldWidth + 1; y++) {
+        for (let y = 0; y < WORLD_WIDTH + 1; y++) {
             ctx.moveTo(0, CELL_SIZE * y)
-            ctx.lineTo(worldWidth * CELL_SIZE, CELL_SIZE * y)
+            ctx.lineTo(WORLD_WIDTH * CELL_SIZE, CELL_SIZE * y)
         }
         ctx.stroke()
     }
 
     const drawRewardCell = () => {
         const idx = world.reward_cell()
-        const col = idx % worldWidth
-        const row = Math.floor(idx / worldWidth)
+        const col = idx % WORLD_WIDTH
+        const row = Math.floor(idx / WORLD_WIDTH)
 
         ctx.fillStyle = '#ff0000'
 
@@ -89,8 +88,8 @@ init().then((wasm) => {
         .slice()
         .reverse()    
         .forEach((cellIdx, i) => {
-            const col = cellIdx % worldWidth
-            const row = Math.floor(cellIdx / worldWidth)
+            const col = cellIdx % WORLD_WIDTH
+            const row = Math.floor(cellIdx / WORLD_WIDTH)
 
             ctx.fillStyle = i === snakeCells.length - 1 ? '#7878db' : '#000'
 
