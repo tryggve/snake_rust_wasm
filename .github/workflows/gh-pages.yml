@@ -23,13 +23,11 @@ jobs:
     - name: Build NodeJS
       run: |
             npm install --prefix www
-            ls -la
-            echo '************'
-            ls -la www/
+            npm run build --prefix www            
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v1.0.8
       with:
-        path: ./www/public/
+        path: www/public/
 
   deploy:
     needs: build
