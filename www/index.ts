@@ -1,8 +1,5 @@
 import init, { Direction, World, GameStatus } from 'snake-game'
-
-export const random = (max: number) => {
-    return Math.floor(Math.random() * max)
-}
+import { random } from './random'
 
 init().then((wasm) => {
     const CELL_SIZE = 30

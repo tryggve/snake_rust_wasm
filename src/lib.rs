@@ -4,7 +4,7 @@ use wee_alloc::WeeAlloc;
 #[global_allocator]
 static ALLOC: WeeAlloc = WeeAlloc::INIT;
 
-#[wasm_bindgen(module = "/www/index.ts")]
+#[wasm_bindgen(module = "/www/random.ts")]
 extern {
     fn random(max: usize) -> usize;
 }
