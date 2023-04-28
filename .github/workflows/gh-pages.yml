@@ -21,7 +21,11 @@ jobs:
     - name: Build Wasm
       run: wasm-pack build --target web
     - name: Build NodeJS
-      run: npm install --prefix www
+      run: |
+            npm install --prefix www
+            ls -la
+            echo '************'
+            ls -la www/
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v1.0.8
       with:
